@@ -1,5 +1,6 @@
 ﻿using DataAccess.Concrete.EntityFramework.Mapping;
 using Entities.Concrete;
+using Entities.Dtos.UserDtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.Contexts
@@ -25,6 +26,6 @@ namespace DataAccess.Concrete.Contexts
             modelBuilder.ApplyConfiguration(new UserMap());
         }
 
-        public virtual DbSet<User> Users { get; set; }
+            public virtual DbSet<UserDto> Users { get; set; }
     }
 }

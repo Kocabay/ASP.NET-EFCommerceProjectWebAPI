@@ -15,7 +15,9 @@ namespace DataAccess.Concrete.EntityFramework.Mapping
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("Users", @"dbo");
+
             builder.HasKey(x => x.Id);
+
             builder.Property(x => x.UserName)
                 .HasColumnName("UserName")
                 .HasMaxLength(50)
@@ -56,7 +58,6 @@ namespace DataAccess.Concrete.EntityFramework.Mapping
                 CreatedUserId = 1,
                 UserName = "aliveli",
                 Email = "aliveli@gmail.com"
-
             });
 
         }

@@ -12,37 +12,36 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(EFCommerceProjectWebAPIContext))]
-    [Migration("20240529215222_initial")]
-    partial class initial
+    [Migration("20240813172810_mig_first")]
+    partial class mig_first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Entities.Concrete.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 5, 30, 0, 52, 22, 489, DateTimeKind.Local).AddTicks(4177));
+                        .HasDefaultValue(new DateTime(2024, 8, 13, 20, 28, 10, 296, DateTimeKind.Local).AddTicks(372));
 
-                    b.Property<int>("CreatedUserId")
+                    b.Property<int?>("CreatedUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -50,7 +49,6 @@ namespace DataAccess.Migrations
                         .HasColumnName("DateOfBirth");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -75,10 +73,10 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("Password");
 
-                    b.Property<DateTime>("UpdateDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UpdateUserId")
+                    b.Property<int?>("UpdatedUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
@@ -96,7 +94,6 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             Address = "Sakarya",
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedUserId = 1,
                             DateOfBirth = new DateTime(1998, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "aliveli@gmail.com",
@@ -104,10 +101,42 @@ namespace DataAccess.Migrations
                             Gender = true,
                             LastName = "konya",
                             Password = "1324",
-                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdateUserId = 0,
                             UserName = "aliveli"
                         });
+                });
+
+            modelBuilder.Entity("Entities.Dtos.UserDtos.UserDto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Gender")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }
